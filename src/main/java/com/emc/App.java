@@ -1,5 +1,7 @@
 package com.emc;
 
+import com.emc.step.*;
+
 /**
  * Hello world!
  *
@@ -17,12 +19,12 @@ public class App
                 .build();*/
 
 
-        Email.FromStep fromStep  = Email.builder();
-        Email.ToStep toStep = fromStep.from(new EmailAddress().of("Pat.Li@vce.com"));
-        Email.SubjectStep subjectStep = toStep.to(new EmailAddress().of("xueyuanl@live.cn"));
-        Email.ContentStep contentStep = subjectStep.subject(new Subject().of("Subject"));
-        Email.Build build = contentStep.content(new Content().of("Test email"));
-        Email email = build.build();
+        FromStep fromStep  = Builder.builder();
+        ToStep toStep = fromStep.from(new EmailAddress().of("Pat.Li@vce.com"));
+        SubjectStep subjectStep = toStep.to(new EmailAddress().of("xueyuanl@live.cn"));
+        ContentStep contentStep = subjectStep.subject(new Subject().of("Subject"));
+        BuildStep buildStep = contentStep.content(new Content().of("Test email"));
+        Email email = buildStep.build();
 
 
         System.out.println(email.getFrom().getEmailAddress());

@@ -1,7 +1,6 @@
 package com.emc;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.emc.step.Builder;
 import java.util.List;
 
 public class Email {
@@ -11,19 +10,37 @@ public class Email {
     private Subject subject;
     private Content content;
 
-    private Email(Builder builder){
-        this.from = builder.from;
-        this.to = builder.to;
-        this.cc = builder.cc;
-        this.subject = builder.subject;
-        this.content = builder.content;
+    public Email(Builder builder){
+        this.from = builder.getFrom();
+        this.to = builder.getTo();
+        this.cc = builder.getCc();
+        this.subject = builder.getSubject();
+        this.content = builder.getContent();
     }
 
-    public static FromStep builder(){
-        return new Builder();
+
+
+    public EmailAddress getFrom() {
+        return from;
     }
 
-    public interface FromStep{
+    public List<EmailAddress> getTo() {
+        return to;
+    }
+
+    public List<EmailAddress> getCc() {
+        return cc;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public Content getContent() {
+        return content;
+    }
+
+    /* public interface FromStep{
         ToStep from(EmailAddress from);
     }
 
@@ -42,10 +59,9 @@ public class Email {
     public interface Build{
         Email build();
         Build cc(List<EmailAddress> cc);
-    }
+    }*/
 
-
-    public static class Builder implements FromStep, ToStep, SubjectStep, ContentStep, Build{
+    /*public static class Builder implements FromStep, ToStep, SubjectStep, ContentStep, Build{
         private EmailAddress from;
         private List<EmailAddress> to;
         private List<EmailAddress> cc;
@@ -81,25 +97,6 @@ public class Email {
             return new Email(this);
         }
 
-    }
+    }*/
 
-    public EmailAddress getFrom() {
-        return from;
-    }
-
-    public List<EmailAddress> getTo() {
-        return to;
-    }
-
-    public List<EmailAddress> getCc() {
-        return cc;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public Content getContent() {
-        return content;
-    }
 }
